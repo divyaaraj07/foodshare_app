@@ -58,6 +58,28 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
         </span>
       </div>
 
+      {/* Dedicated Page Navigator between Existing Sign In & New User Login */}
+      <div className="bg-surface-container-high p-1 rounded-2xl flex items-center mb-3.5 border border-surface-container shadow-xs">
+        <button
+          type="button"
+          disabled
+          className="flex-1 py-2 px-2.5 rounded-xl bg-surface-container-lowest text-primary shadow-xs font-label-md font-bold text-center flex items-center justify-center gap-1.5 cursor-default text-xs"
+        >
+          <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+            login
+          </span>
+          <span>1. Returning Sign In</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setScreen('new-user-login')}
+          className="flex-1 py-2 px-2.5 rounded-xl text-on-surface-variant hover:text-tertiary hover:bg-surface-container font-label-md font-bold text-center flex items-center justify-center gap-1.5 transition-all text-xs group"
+        >
+          <span className="material-symbols-outlined text-[16px] text-tertiary">person_add</span>
+          <span className="group-hover:underline">2. New User Login &rarr;</span>
+        </button>
+      </div>
+
       {/* Hero Welcome Card */}
       <div className="rounded-2xl bg-surface-container-low p-4 mb-4 border border-surface-container shadow-xs">
         <div className="flex items-center gap-3">

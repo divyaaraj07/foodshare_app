@@ -85,6 +85,36 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
         </button>
       </div>
 
+      {/* Account Portals Strip: New User vs Existing Sign In */}
+      <div className="bg-surface-container-low p-3 rounded-2xl border border-surface-container flex items-center justify-between gap-2 shadow-xs">
+        <div className="min-w-0">
+          <span className="font-label-sm text-[11px] text-on-surface-variant font-bold uppercase tracking-wider block">
+            Account Access • கணக்கு
+          </span>
+          <span className="font-body-sm text-xs text-on-surface font-semibold truncate block">
+            Switch profile or register as new user
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            type="button"
+            onClick={() => setScreen('new-user-login')}
+            className="px-2.5 py-1.5 rounded-xl bg-tertiary-container hover:bg-tertiary-container/80 text-on-tertiary-container font-label-sm font-bold text-xs flex items-center gap-1 transition-all shadow-xs"
+          >
+            <span className="material-symbols-outlined text-[15px]">person_add</span>
+            <span>New User</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setScreen('login')}
+            className="px-2.5 py-1.5 rounded-xl bg-surface-container-high hover:bg-surface-container text-on-surface font-label-sm font-bold text-xs flex items-center gap-1 transition-all"
+          >
+            <span className="material-symbols-outlined text-[15px]">login</span>
+            <span>Sign In</span>
+          </button>
+        </div>
+      </div>
+
       {/* Primary Action Dispatch Button */}
       <div>
         <button

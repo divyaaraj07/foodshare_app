@@ -99,8 +99,33 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Right cluster: notifications & profile */}
-        <div className="flex items-center gap-1 relative">
+        {/* Right cluster: quick login button, notifications & profile */}
+        <div className="flex items-center gap-1.5 relative">
+          {/* Direct Quick Login Page Action */}
+          <button
+            type="button"
+            onClick={() => {
+              if (currentScreen === 'new-user-login') {
+                setScreen('login');
+              } else {
+                setScreen('new-user-login');
+              }
+            }}
+            className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shadow-xs active:scale-95 border ${
+              currentScreen === 'new-user-login'
+                ? 'bg-primary-container text-on-primary-container border-primary/30 hover:bg-primary hover:text-on-primary'
+                : 'bg-tertiary-container text-on-tertiary-container border-tertiary-container hover:bg-tertiary hover:text-white'
+            }`}
+            title={currentScreen === 'new-user-login' ? 'Switch to Returning User Login' : 'Open Dedicated New User Login Page'}
+          >
+            <span className="material-symbols-outlined text-[15px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+              {currentScreen === 'new-user-login' ? 'login' : 'person_add'}
+            </span>
+            <span className="font-semibold">
+              {currentScreen === 'new-user-login' ? 'Sign In' : 'New User'}
+            </span>
+          </button>
+
           {/* Notifications Button */}
           <button
             onClick={() => {

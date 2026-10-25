@@ -62,6 +62,28 @@ export const NewUserLoginScreen: React.FC<NewUserLoginScreenProps> = ({
         </span>
       </div>
 
+      {/* Dedicated Page Navigator between Existing Sign In & New User Login */}
+      <div className="bg-surface-container-high p-1 rounded-2xl flex items-center mb-3.5 border border-surface-container shadow-xs">
+        <button
+          type="button"
+          onClick={() => setScreen('login')}
+          className="flex-1 py-2 px-2.5 rounded-xl text-on-surface-variant hover:text-primary hover:bg-surface-container font-label-md font-bold text-center flex items-center justify-center gap-1.5 transition-all text-xs group"
+        >
+          <span className="material-symbols-outlined text-[16px] text-primary">login</span>
+          <span className="group-hover:underline">&larr; 1. Returning Sign In</span>
+        </button>
+        <button
+          type="button"
+          disabled
+          className="flex-1 py-2 px-2.5 rounded-xl bg-surface-container-lowest text-tertiary-container shadow-xs font-label-md font-bold text-center flex items-center justify-center gap-1.5 cursor-default text-xs"
+        >
+          <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+            person_add
+          </span>
+          <span>2. New User Login</span>
+        </button>
+      </div>
+
       {/* Hero Header Card */}
       <div className="rounded-3xl bg-gradient-to-br from-surface-container-low via-surface-container to-surface-container-high p-5 mb-5 border border-surface-container shadow-xs relative overflow-hidden">
         <div className="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-primary-fixed/20 pointer-events-none blur-xl"></div>
@@ -178,6 +200,59 @@ export const NewUserLoginScreen: React.FC<NewUserLoginScreenProps> = ({
                   Bike / Auto / Tata Ace driver or community volunteer in Tamil Nadu
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* Quick Demo Autofill Chips */}
+          <div className="bg-surface-container-low p-2.5 rounded-2xl border border-surface-container">
+            <span className="font-label-sm text-[11px] text-on-surface-variant uppercase tracking-wider font-bold block mb-1.5">
+              Instant 1-Click Demo Profiles (புதிய பயனர் மாதிரிகள்):
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              <button
+                type="button"
+                onClick={() => {
+                  setUserIntent('donor');
+                  setFullName('Sri Raghavendra Mandapam');
+                  setMobileNumber('98410 88219');
+                  setDistrict('Chennai');
+                  setLocality('Mylapore, North Mada St');
+                }}
+                className="px-2.5 py-1 rounded-xl bg-surface-container-highest hover:bg-primary-container text-on-surface hover:text-on-primary-container font-label-sm text-[11px] font-bold transition-colors border border-surface-container flex items-center gap-1"
+              >
+                <span>🏢</span>
+                <span>Mandapam Donor</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setUserIntent('recipient');
+                  setFullName('Anbalayam Seva Trust');
+                  setMobileNumber('94432 15002');
+                  setDistrict('Madurai');
+                  setLocality('Simmakkal');
+                }}
+                className="px-2.5 py-1 rounded-xl bg-surface-container-highest hover:bg-tertiary-container text-on-surface hover:text-on-tertiary-container font-label-sm text-[11px] font-bold transition-colors border border-surface-container flex items-center gap-1"
+              >
+                <span>🍲</span>
+                <span>Shelter Recipient</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setUserIntent('volunteer');
+                  setFullName('K. Vignesh (Auto)');
+                  setMobileNumber('97890 33411');
+                  setDistrict('Coimbatore');
+                  setLocality('RS Puram');
+                }}
+                className="px-2.5 py-1 rounded-xl bg-surface-container-highest hover:bg-secondary-fixed text-on-surface hover:text-on-secondary-fixed font-label-sm text-[11px] font-bold transition-colors border border-surface-container flex items-center gap-1"
+              >
+                <span>🛵</span>
+                <span>Volunteer Transport</span>
+              </button>
             </div>
           </div>
 
