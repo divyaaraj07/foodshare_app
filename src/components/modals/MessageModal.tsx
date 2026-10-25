@@ -24,8 +24,8 @@ export const MessageModal: React.FC<MessageModalProps> = ({
     {
       id: '1',
       sender: 'donor',
-      text: `Hi there! I'm ${contactName} from ${donorName}. The batch is refrigerated and boxed in eco-kraft packaging ready at our back loading dock #3.`,
-      time: '5:10 PM'
+      text: `வணக்கம்! I am ${contactName} from ${donorName}. The surplus lunch packets are fresh, hot, and packed in food-grade silver foil boxes ready at our rear kitchen loading gate on Pitchu Pillai Street.`,
+      time: '2:45 PM'
     }
   ]);
   const [input, setInput] = useState('');
@@ -46,23 +46,23 @@ export const MessageModal: React.FC<MessageModalProps> = ({
     setMessages((prev) => [...prev, newMsg]);
     setInput('');
 
-    // Simulated quick donor response
+    // Simulated quick reply from chef
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
         {
           id: String(Date.now() + 1),
           sender: 'donor',
-          text: `Got it! I will have our prep lead have the crates stationed by Dock #3. Safe travels!`,
+          text: `சரிங்க! Our kitchen supervisor will keep the insulated thermal crates ready by the ramp. Please share the volunteer vehicle registration number on arrival.`,
           time: 'Just now'
         }
       ]);
-    }, 1200);
+    }, 1100);
   };
 
   return (
     <div className="fixed inset-0 z-50 bg-inverse-surface/60 backdrop-blur-sm flex items-center justify-center p-3 animate-in fade-in duration-200">
-      <div className="w-full max-w-md bg-surface-container-lowest rounded-3xl overflow-hidden shadow-2xl flex flex-col h-[520px]">
+      <div className="w-full max-w-md bg-surface-container-lowest rounded-3xl overflow-hidden shadow-2xl flex flex-col h-[520px] border border-surface-container">
         {/* Header */}
         <div className="p-3.5 bg-surface-container-low flex items-center justify-between border-b border-surface-container">
           <div className="flex items-center gap-2.5">
@@ -72,11 +72,15 @@ export const MessageModal: React.FC<MessageModalProps> = ({
               className="w-10 h-10 rounded-full object-cover"
             />
             <div className="min-w-0">
-              <div className="font-title-md text-title-md text-on-surface font-semibold flex items-center gap-1">
+              <div className="font-title-md text-title-md text-on-surface font-bold flex items-center gap-1">
                 <span>{contactName}</span>
-                <span className="material-symbols-outlined text-[16px] text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                <span className="material-symbols-outlined text-[16px] text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  verified
+                </span>
               </div>
-              <span className="font-label-sm text-on-surface-variant truncate block">{donorName} • Fast Responder</span>
+              <span className="font-label-sm text-on-surface-variant truncate block font-medium">
+                {donorName} • Mylapore, Chennai
+              </span>
             </div>
           </div>
           <button
@@ -90,8 +94,8 @@ export const MessageModal: React.FC<MessageModalProps> = ({
         {/* Message Thread */}
         <div className="flex-1 p-3.5 overflow-y-auto space-y-3 bg-surface">
           <div className="text-center">
-            <span className="font-label-sm text-on-surface-variant bg-surface-container-low px-2.5 py-0.5 rounded-full">
-              Protected Food Coordination Chat
+            <span className="font-label-sm text-on-surface-variant bg-surface-container-low px-2.5 py-0.5 rounded-full border border-surface-container font-semibold">
+              🔒 FSSAI IFSA Tamil Nadu Coordination Chat
             </span>
           </div>
 
@@ -100,9 +104,9 @@ export const MessageModal: React.FC<MessageModalProps> = ({
             return (
               <div key={m.id} className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}>
                 <div
-                  className={`max-w-[80%] rounded-2xl p-3 text-body-sm shadow-xs ${
+                  className={`max-w-[82%] rounded-2xl p-3 text-body-sm shadow-xs ${
                     isUser
-                      ? 'bg-primary text-on-primary rounded-br-none'
+                      ? 'bg-primary text-on-primary rounded-br-none font-medium'
                       : 'bg-surface-container-lowest text-on-surface rounded-bl-none border border-surface-container'
                   }`}
                 >
@@ -114,36 +118,36 @@ export const MessageModal: React.FC<MessageModalProps> = ({
           })}
         </div>
 
-        {/* Quick Prompt Chips */}
+        {/* Quick Chips */}
         <div className="px-3 py-1.5 bg-surface-container-low flex items-center gap-1.5 overflow-x-auto no-scrollbar border-t border-surface-container">
           <button
-            onClick={() => handleSend("Our driver is 8 minutes away in Van #2!")}
-            className="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high"
+            onClick={() => handleSend("Van TN-07-BW-4821 is 10 minutes away on Luz Church Road!")}
+            className="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high font-semibold"
           >
-            🚐 Driver arriving in 8m
+            🚐 Tata Ace 10m away
           </button>
           <button
-            onClick={() => handleSend("Do we need any special lift gate for the crates?")}
-            className="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high"
+            onClick={() => handleSend("Do we need to bring our own insulated stainless steel milk cans?")}
+            className="shrink-0 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high font-semibold"
           >
-            📦 Dock details?
+            📦 Thermal crates ready?
           </button>
         </div>
 
-        {/* Send input */}
+        {/* Input */}
         <div className="p-3 bg-surface-container-lowest border-t border-surface-container flex items-center gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder={`Message ${contactName.split(' ')[0]}...`}
-            className="flex-1 h-11 px-3.5 rounded-xl bg-surface-container-low text-on-surface font-body-md outline-none focus:bg-surface-container-highest transition-colors"
+            placeholder={`Message ${contactName.split(' ')[0]} Chef...`}
+            className="flex-1 h-11 px-3.5 rounded-xl bg-surface-container-low text-on-surface font-body-md outline-none focus:bg-surface-container-highest transition-colors border border-surface-container"
           />
           <button
             onClick={() => handleSend()}
             disabled={!input.trim()}
-            className="w-11 h-11 rounded-xl bg-primary text-on-primary flex items-center justify-center disabled:opacity-50 hover:bg-primary-container active:scale-95 transition-all shadow-sm"
+            className="w-11 h-11 rounded-xl bg-primary text-on-primary flex items-center justify-center disabled:opacity-50 hover:bg-primary-container active:scale-95 transition-all shadow-sm font-bold"
           >
             <span className="material-symbols-outlined text-[20px]">send</span>
           </button>

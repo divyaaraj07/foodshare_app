@@ -21,20 +21,22 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
   const [activeItems, setActiveItems] = useState([
     {
       id: 'act-1',
-      title: 'Individually Packed Veggie Grain Bowls',
-      subtitle: 'Available: 28 boxes (Mediterranean Quinoa & Herb)',
+      title: 'Hot Sambar Rice, Lemon Rice & Aviyal',
+      tamilTitle: 'சுடச்சுட சாம்பார் சாதம் & அவியல்',
+      subtitle: 'Available: 85 meal packets (Mylapore Marriage Hall)',
       requests: 2,
-      expiry: 'Expires in 3h 15m',
-      status: 'Ready for pickup',
+      expiry: 'Pick up before 5:00 PM',
+      status: 'Ready in thermal carriers',
       dotColor: 'bg-tertiary'
     },
     {
       id: 'act-2',
-      title: 'Artisan Sourdough Loaves',
-      subtitle: 'Available: 12 loaves (Country White & Seeded Rye)',
+      title: '120 Pieces Mallipoo Idli & Medu Vada',
+      tamilTitle: 'மல்லிகைப் பூ இட்லி & மெது வடை',
+      subtitle: 'Available: 40 servings (T. Nagar Tiffin Stall)',
       requests: 0,
-      expiry: 'Expires tomorrow, 9 AM',
-      status: 'Listed 2 hours ago',
+      expiry: 'Expires in 2 hours',
+      status: 'Hot in insulated hotbox',
       dotColor: 'bg-primary'
     }
   ]);
@@ -56,12 +58,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
         <div className="flex flex-col min-w-0 pr-space-sm">
           <div className="flex items-center gap-1.5 text-primary">
             <span className="material-symbols-outlined text-[18px]">verified</span>
-            <span className="font-label-sm text-label-sm uppercase tracking-wider font-semibold">
-              Urban Kitchen Catering
+            <span className="font-label-sm text-label-sm uppercase tracking-wider font-bold">
+              Sri Meenakshi Bhavan • மயிலாப்பூர்
             </span>
           </div>
           <h1 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold truncate">
-            Welcome back, Maria!
+            வணக்கம், Senthil Chef!
           </h1>
         </div>
 
@@ -72,13 +74,13 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
             if (userRole === 'donor') setUserRole('recipient');
             else setUserRole('donor');
           }}
-          className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-container text-on-primary-container shadow-sm hover:bg-primary transition-all active:scale-95"
-          title="Click to toggle Role"
+          className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-container text-on-primary-container shadow-sm hover:bg-primary transition-all active:scale-95 font-bold"
+          title="Click to toggle perspective"
         >
           <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-            storefront
+            restaurant
           </span>
-          <span className="font-label-sm text-label-sm font-semibold tracking-wide">Donor Mode</span>
+          <span className="font-label-sm text-label-sm font-bold tracking-wide">Donor Mode</span>
           <span className="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse"></span>
         </button>
       </div>
@@ -90,7 +92,9 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
           className="w-full flex items-center justify-center gap-space-sm bg-primary-container text-on-primary-container py-3.5 px-space-lg rounded-2xl shadow-md hover:bg-primary transition-all transform active:scale-[0.99] font-bold"
         >
           <span className="material-symbols-outlined text-[24px]">add_circle</span>
-          <span className="font-title-md text-title-md tracking-tight font-semibold">+ List New Food Donation</span>
+          <span className="font-title-md text-title-md tracking-tight font-bold">
+            + Post Marriage Hall / Kitchen Surplus Food
+          </span>
         </button>
       </div>
 
@@ -103,13 +107,13 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5">
               <span className="font-label-md text-label-md text-primary font-bold uppercase tracking-wider">
-                Annual Impact
+                Tamil Nadu Annual Impact • ஆண்டு சாதனை
               </span>
               <span className="text-xs">🌿</span>
             </div>
             <p className="font-body-md text-body-md text-on-surface font-medium mt-0.5">
-              You've helped provide <span className="font-title-md text-primary font-bold">3,240 meals</span> and saved{' '}
-              <span className="font-title-md text-primary font-bold">1.6 tons</span> of CO₂ this year!
+              Your kitchen has distributed <span className="font-title-md text-primary font-bold">4,850 meals</span> to local Anbalayams and saved{' '}
+              <span className="font-title-md text-primary font-bold">2.4 tons</span> of greenhouse gas this year!
             </p>
           </div>
         </div>
@@ -120,18 +124,18 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
         {/* Metric 1: Total Donated */}
         <div className="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm flex flex-col justify-between space-y-2 border border-surface-container">
           <div className="flex items-center justify-between">
-            <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">Total Donated</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant font-semibold">Total Food Shared</span>
             <div className="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-primary">
               <span className="material-symbols-outlined text-[16px]">scale</span>
             </div>
           </div>
           <div>
             <div className="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">
-              1,420 <span className="font-body-sm text-body-sm text-on-surface-variant font-normal">kg</span>
+              2,140 <span className="font-body-sm text-body-sm text-on-surface-variant font-normal">kg</span>
             </div>
             <div className="flex items-center gap-1 mt-1 text-primary">
               <span className="material-symbols-outlined text-[14px]">trending_up</span>
-              <span className="font-label-sm text-label-sm font-semibold">+18% this mo.</span>
+              <span className="font-label-sm text-label-sm font-bold">+24% this wedding season</span>
             </div>
           </div>
         </div>
@@ -140,7 +144,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
         <div className="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm flex flex-col justify-between space-y-2 relative overflow-hidden border border-surface-container">
           <div className="absolute -right-4 -bottom-4 w-16 h-16 rounded-full bg-tertiary-fixed/30 pointer-events-none"></div>
           <div className="flex items-center justify-between">
-            <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">Pending Requests</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant font-semibold">Pending Requests</span>
             <span className="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span>
               Action
@@ -150,14 +154,14 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
             <div className="font-headline-sm text-headline-sm text-tertiary font-bold tracking-tight">
               {pendingRequests.length}
             </div>
-            <span className="font-label-sm text-label-sm text-on-surface-variant">Awaiting review</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">Awaiting driver dispatch</span>
           </div>
         </div>
 
         {/* Metric 3: Active Listings */}
         <div className="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm flex flex-col justify-between space-y-2 border border-surface-container">
           <div className="flex items-center justify-between">
-            <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">Active Listings</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant font-semibold">Active Batches</span>
             <div className="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant">
               <span className="material-symbols-outlined text-[16px]">inventory_2</span>
             </div>
@@ -166,35 +170,37 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
             <div className="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">
               {activeItems.length} <span className="font-body-sm text-body-sm text-on-surface-variant font-normal">batches</span>
             </div>
-            <span className="font-label-sm text-label-sm text-on-surface-variant">Available for pickup</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">In insulated containers</span>
           </div>
         </div>
 
         {/* Metric 4: Completed Rescues */}
         <div className="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm flex flex-col justify-between space-y-2 border border-surface-container">
           <div className="flex items-center justify-between">
-            <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">Completed</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant font-semibold">Fulfilled Rescues</span>
             <div className="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-primary">
               <span className="material-symbols-outlined text-[16px]">task_alt</span>
             </div>
           </div>
           <div>
             <div className="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">
-              46 <span className="font-body-sm text-body-sm text-on-surface-variant font-normal">runs</span>
+              68 <span className="font-body-sm text-body-sm text-on-surface-variant font-normal">runs</span>
             </div>
-            <span className="font-label-sm text-label-sm text-on-surface-variant">100% fulfilled</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">100% verified</span>
           </div>
         </div>
       </div>
 
-      {/* Incoming Requests Section (Needs Attention) */}
+      {/* Incoming Requests Section */}
       <section className="space-y-space-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-space-xs">
             <span className="material-symbols-outlined text-tertiary text-[20px]">notification_important</span>
-            <h2 className="font-title-md text-title-md text-on-surface font-bold">Incoming Requests</h2>
+            <h2 className="font-title-md text-title-md text-on-surface font-bold">
+              Incoming Dispatch Requests • உடனடி கோரிக்கைகள்
+            </h2>
           </div>
-          <span className="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+          <span className="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">
             {pendingRequests.length} Needs Attention
           </span>
         </div>
@@ -218,13 +224,13 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-1">
                     <span
-                      className={`font-label-sm text-label-sm font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                      className={`font-label-sm text-label-sm font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
                         req.status === 'accepted'
                           ? 'bg-primary text-on-primary'
                           : 'text-on-tertiary-fixed-variant bg-tertiary-fixed'
                       }`}
                     >
-                      {req.status === 'accepted' ? 'Confirmed & Scheduled' : 'Pending Confirmation'}
+                      {req.status === 'accepted' ? 'Confirmed • Vehicle En Route' : 'Pending Confirmation'}
                     </span>
                     <span className="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-0.5">
                       <span className="material-symbols-outlined text-[14px]">schedule</span> {req.timeAgo}
@@ -234,23 +240,23 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
                     {req.recipientName}
                   </h3>
                   <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                    Requested: <span className="text-on-surface font-medium">{req.requestedItem}</span>
+                    Requested: <span className="text-on-surface font-bold">{req.requestedItem}</span>
                   </p>
                 </div>
               </div>
 
               {/* Logistics details pill */}
-              <div className="bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between text-on-surface-variant">
+              <div className="bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between text-on-surface-variant border border-surface-container">
                 <div className="flex items-center gap-1.5 truncate">
                   <span className="material-symbols-outlined text-primary text-[18px]">
-                    {req.volunteer ? 'directions_car' : 'schedule'}
+                    local_shipping
                   </span>
                   <span className="font-body-sm text-body-sm truncate">
-                    Pickup: <strong className="text-on-surface font-semibold">{req.pickupTime}</strong>
+                    Pickup: <strong className="text-on-surface font-bold">{req.pickupTime}</strong>
                   </span>
                 </div>
-                <span className="font-label-sm text-label-sm shrink-0 px-2 py-0.5 rounded-md bg-surface-variant text-on-surface-variant font-medium">
-                  {req.volunteer ? `Vol: ${req.volunteer}` : req.transportType}
+                <span className="font-label-sm text-label-sm shrink-0 px-2 py-0.5 rounded-md bg-surface-variant text-on-surface font-bold">
+                  {req.vehicleNumber || 'Van Dispatch'}
                 </span>
               </div>
 
@@ -259,9 +265,10 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
                 <div className="flex items-center gap-space-sm pt-1">
                   <button
                     onClick={() => onAcceptRequest(req.id, req.recipientName)}
-                    className="flex-1 bg-primary-container text-on-primary-container hover:bg-primary py-2.5 px-space-md rounded-xl font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all"
+                    className="flex-1 bg-primary-container text-on-primary-container hover:bg-primary py-2.5 px-space-md rounded-xl font-label-md text-label-md font-bold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all"
                   >
-                    <span className="material-symbols-outlined text-[18px]">check_circle</span> Accept Request
+                    <span className="material-symbols-outlined text-[18px]">check_circle</span>
+                    <span>Accept Request • அனுமதி</span>
                   </button>
                   <button
                     onClick={() => onDeclineRequest(req.id)}
@@ -274,12 +281,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
                 <div className="flex items-center justify-between py-1 text-primary">
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-[20px]">task_alt</span>
-                    <span className="font-label-md text-label-md font-semibold">
-                      Scheduled for {req.recipientName}!
+                    <span className="font-label-md text-label-md font-bold">
+                      Vehicle gate pass generated for {req.recipientName}!
                     </span>
                   </div>
-                  <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">
-                    Pickup pass active
+                  <span className="font-label-sm text-label-sm text-on-surface-variant font-bold">
+                    OTP Dispatched
                   </span>
                 </div>
               )}
@@ -288,16 +295,16 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
         })}
       </section>
 
-      {/* Active Listings Management List */}
+      {/* Active Listings */}
       <section className="space-y-space-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-space-xs">
             <span className="material-symbols-outlined text-primary text-[20px]">fastfood</span>
-            <h2 className="font-title-md text-title-md text-on-surface font-bold">Active Listings</h2>
+            <h2 className="font-title-md text-title-md text-on-surface font-bold">Your Live Kitchen Batches</h2>
           </div>
           <button
             onClick={() => setScreen('browse')}
-            className="font-label-sm text-label-sm font-semibold text-primary hover:underline"
+            className="font-label-sm text-label-sm font-bold text-primary hover:underline"
           >
             View All ({activeItems.length})
           </button>
@@ -312,47 +319,52 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   {item.requests > 0 ? (
-                    <span className="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+                    <span className="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold">
                       {item.requests} Requests
                     </span>
                   ) : (
-                    <span className="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold flex items-center gap-1">
+                    <span className="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> Active
                     </span>
                   )}
-                  <span className="font-label-sm text-label-sm text-on-surface-variant">{item.expiry}</span>
+                  <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">{item.expiry}</span>
                 </div>
-                <h3 className="font-title-md text-title-md text-on-surface font-semibold mt-1 truncate">
+                <h3 className="font-title-md text-title-md text-on-surface font-bold mt-1 truncate">
                   {item.title}
                 </h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant">{item.subtitle}</p>
+                {item.tamilTitle && (
+                  <p className="font-label-sm text-primary font-semibold truncate">
+                    {item.tamilTitle}
+                  </p>
+                )}
+                <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">{item.subtitle}</p>
               </div>
             </div>
 
             {/* Action strip */}
             <div className="flex items-center justify-between pt-2 border-t border-surface-container-low">
-              <span className="font-label-sm text-label-sm text-secondary flex items-center gap-1.5">
+              <span className="font-label-sm text-label-sm text-secondary flex items-center gap-1.5 font-medium">
                 <span className={`w-2 h-2 rounded-full ${item.dotColor}`}></span>
                 {item.status}
               </span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setScreen('donate')}
-                  className="px-3 py-1.5 rounded-xl bg-surface-container text-on-surface font-label-sm text-label-sm font-medium hover:bg-surface-variant transition-colors flex items-center gap-1"
+                  className="px-3 py-1.5 rounded-xl bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-variant transition-colors flex items-center gap-1"
                 >
                   <span className="material-symbols-outlined text-[16px]">edit</span> Edit
                 </button>
                 {item.requests > 0 ? (
                   <button
                     onClick={() => handleMarkComplete(item.id)}
-                    className="px-3 py-1.5 rounded-xl bg-primary/10 text-primary font-label-sm text-label-sm font-semibold hover:bg-primary/20 transition-colors flex items-center gap-1"
+                    className="px-3 py-1.5 rounded-xl bg-primary/10 text-primary font-label-sm text-label-sm font-bold hover:bg-primary/20 transition-colors flex items-center gap-1"
                   >
-                    <span className="material-symbols-outlined text-[16px]">done_all</span> Mark Complete
+                    <span className="material-symbols-outlined text-[16px]">done_all</span> Mark Handed Over
                   </button>
                 ) : (
                   <button
                     onClick={() => handleCancelListing(item.id)}
-                    className="px-3 py-1.5 rounded-xl bg-surface-container text-error font-label-sm text-label-sm font-medium hover:bg-error-container transition-colors flex items-center gap-1"
+                    className="px-3 py-1.5 rounded-xl bg-surface-container text-error font-label-sm text-label-sm font-semibold hover:bg-error-container transition-colors flex items-center gap-1"
                   >
                     <span className="material-symbols-outlined text-[16px]">close</span> Cancel
                   </button>

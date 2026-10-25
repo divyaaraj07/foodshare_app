@@ -10,7 +10,10 @@ import { DonateScreen } from './components/screens/DonateScreen';
 import { DashboardScreen } from './components/screens/DashboardScreen';
 import { ActivityScreen } from './components/screens/ActivityScreen';
 import { AdminScreen } from './components/screens/AdminScreen';
-import { AuthScreen } from './components/screens/AuthScreen';
+import { LoginScreen } from './components/screens/LoginScreen';
+import { NewUserLoginScreen } from './components/screens/NewUserLoginScreen';
+import { RegisterScreen } from './components/screens/RegisterScreen';
+import { OtpVerifyScreen } from './components/screens/OtpVerifyScreen';
 import { MapModal } from './components/modals/MapModal';
 import { AlertModal } from './components/modals/AlertModal';
 import { MessageModal } from './components/modals/MessageModal';
@@ -62,14 +65,15 @@ export default function App() {
       donorName: listing.donorName,
       donorDistance: listing.distance,
       pickupWindow: listing.pickupWindow,
-      driver: 'David S. (Van #2)',
+      driver: 'S. Karthik (Tata Ace)',
+      vehicleNumber: 'TN-07-BW-4821',
       address: listing.pickupAddress,
-      eta: 'ETA 12m',
+      eta: 'ETA 15m',
       imageUrl: listing.imageUrl,
       status: 'ready'
     };
     setDispatches((prev) => [newDisp, ...prev]);
-    showToast(`🎉 Entire batch (${listing.remainingQuantity} portions) reserved! Added to active dispatch.`);
+    showToast(`🎉 Entire batch (${listing.remainingQuantity} portions) reserved! Added to active Tamil Nadu dispatch queue.`);
   };
 
   const handleClaimPartial = (listing: FoodListing, quantity: number) => {
@@ -80,7 +84,7 @@ export default function App() {
           : l
       )
     );
-    showToast(`✅ Reserved ${quantity} meals from ${listing.donorName}! Collection pass generated.`);
+    showToast(`✅ Reserved ${quantity} meals from ${listing.donorName}! Gate pass token generated.`);
   };
 
   const handlePublishListing = (newListing: FoodListing) => {
@@ -91,7 +95,7 @@ export default function App() {
     setIncomingRequests((prev) =>
       prev.map((r) => (r.id === reqId ? { ...r, status: 'accepted' } : r))
     );
-    showToast(`Confirmed! Dispatch notified for ${recipientName}`);
+    showToast(`வணக்கம்! Dispatch confirmed for ${recipientName}`);
   };
 
   const handleDeclineRequest = (reqId: string) => {
@@ -105,29 +109,31 @@ export default function App() {
     setFlaggedReports((prev) =>
       prev.map((r) => (r.id === id ? { ...r, status: 'dismissed' } : r))
     );
-    showToast('Report marked as reviewed and resolved.', 'done_all');
+    showToast('FSSAI incident report reviewed and resolved.', 'done_all');
   };
 
   const handleRemoveListing = (id: string) => {
     setFlaggedReports((prev) =>
       prev.map((r) => (r.id === id ? { ...r, status: 'removed' } : r))
     );
-    showToast('Listing deactivated & removed from public feed.', 'delete_forever');
+    showToast('Listing deactivated & removed from Tamil Nadu feed.', 'delete_forever');
   };
 
   const handleApproveNGO = (id: string, name: string) => {
     setNgoVerifications((prev) =>
       prev.map((n) => (n.id === id ? { ...n, status: 'approved' } : n))
     );
-    showToast(`${name} accredited successfully!`, 'verified');
+    showToast(`${name} accredited under FSSAI IFSA Tamil Nadu!`, 'verified');
   };
 
   const handleRequestNGOInfo = (id: string) => {
     setNgoVerifications((prev) =>
       prev.map((n) => (n.id === id ? { ...n, status: 'info_requested' } : n))
     );
-    showToast('Clarification request dispatched for documentation.', 'send');
+    showToast('Clarification request dispatched for 80G/12A documents.', 'send');
   };
+
+  const isAuthScreen = currentScreen === 'login' || currentScreen === 'new-user-login' || currentScreen === 'register' || currentScreen === 'otp-verify';
 
   return (
     <div className="bg-background min-h-screen flex flex-col font-body-md text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -137,10 +143,13 @@ export default function App() {
         setScreen={setCurrentScreen}
         userRole={userRole}
         setUserRole={setUserRole}
-        showBack={currentScreen === 'details' || currentScreen === 'auth' || currentScreen === 'admin'}
+        showBack={currentScreen === 'details' || currentScreen === 'admin' || isAuthScreen}
         onBack={() => {
           if (currentScreen === 'details') setCurrentScreen('browse');
-          else if (currentScreen === 'admin' || currentScreen === 'auth') setCurrentScreen('home');
+          else if (currentScreen === 'otp-verify') setCurrentScreen('login');
+          else if (currentScreen === 'register') setCurrentScreen('login');
+          else if (currentScreen === 'new-user-login') setCurrentScreen('home');
+          else if (currentScreen === 'login' || currentScreen === 'admin') setCurrentScreen('home');
           else setCurrentScreen('home');
         }}
       />
@@ -222,17 +231,45 @@ export default function App() {
           />
         )}
 
-        {currentScreen === 'auth' && (
-          <AuthScreen
+        {/* Dedicated Separate Login Page */}
+        {currentScreen === 'login' && (
+          <LoginScreen
             setScreen={setCurrentScreen}
             setUserRole={setUserRole}
             onShowToast={showToast}
           />
         )}
+
+        {/* Dedicated Separate New User Login Page */}
+        {currentScreen === 'new-user-login' && (
+          <NewUserLoginScreen
+            setScreen={setCurrentScreen}
+            setUserRole={setUserRole}
+            onShowToast={showToast}
+          />
+        )}
+
+        {/* Dedicated Separate Multi-Step Register Page */}
+        {currentScreen === 'register' && (
+          <RegisterScreen
+            setScreen={setCurrentScreen}
+            setUserRole={setUserRole}
+            onShowToast={showToast}
+          />
+        )}
+
+        {/* Dedicated Separate Mobile OTP Verification Page */}
+        {currentScreen === 'otp-verify' && (
+          <OtpVerifyScreen
+            setScreen={setCurrentScreen}
+            userRole={userRole}
+            onShowToast={showToast}
+          />
+        )}
       </main>
 
-      {/* Fixed Bottom Navigation (visible unless on details or auth modal view) */}
-      {currentScreen !== 'details' && (
+      {/* Fixed Bottom Navigation (hidden on details and dedicated auth pages) */}
+      {currentScreen !== 'details' && !isAuthScreen && (
         <BottomNav currentScreen={currentScreen} setScreen={setCurrentScreen} />
       )}
 
@@ -254,7 +291,7 @@ export default function App() {
         isOpen={isMessageModalOpen}
         onClose={() => setIsMessageModalOpen(false)}
         donorName={selectedListing.donorName}
-        contactName={selectedListing.donorContactName || 'Maria Rodriguez'}
+        contactName={selectedListing.donorContactName || 'Senthil Kumar (Chef)'}
       />
 
       {/* Global Interactive Toast Notification */}
@@ -267,7 +304,7 @@ export default function App() {
             >
               {toast.icon || 'check_circle'}
             </span>
-            <span className="font-body-sm text-body-sm font-medium truncate">
+            <span className="font-body-sm text-body-sm font-semibold truncate">
               {toast.message}
             </span>
           </div>

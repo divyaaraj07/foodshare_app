@@ -5,7 +5,10 @@ export type ScreenType =
   | 'donate' 
   | 'dashboard' 
   | 'activity' 
-  | 'auth' 
+  | 'login'
+  | 'new-user-login'
+  | 'register'
+  | 'otp-verify'
   | 'admin';
 
 export type UserRole = 'donor' | 'recipient' | 'admin';
@@ -13,6 +16,7 @@ export type UserRole = 'donor' | 'recipient' | 'admin';
 export interface FoodListing {
   id: string;
   title: string;
+  tamilTitle?: string;
   category: 'Bakery' | 'Produce' | 'Prepared' | 'Dairy' | 'Canned/Dry';
   categoryLabel: string;
   categoryBg: string;
@@ -23,10 +27,14 @@ export interface FoodListing {
   donorRating: number;
   donorRescuesCount: number;
   donorLocation: string;
+  city: string;
+  district: string;
+  pincode: string;
   distance: string;
   verified: boolean;
   donorAvatar?: string;
   donorContactName?: string;
+  donorPhone?: string;
   quantityString: string;
   portions: number;
   weightKg?: number;
@@ -40,6 +48,7 @@ export interface FoodListing {
   allergenNotice?: string;
   pickupAddress: string;
   pickupInstructions: string;
+  fssaiNumber: string;
   isUrgent?: boolean;
   claimedBy?: string;
   remainingQuantity: number;
@@ -55,6 +64,7 @@ export interface IncomingRequest {
   pickupTime: string;
   volunteer?: string;
   transportType: string;
+  vehicleNumber?: string;
   status: 'pending' | 'accepted' | 'declined';
 }
 
@@ -79,6 +89,7 @@ export interface ActiveDispatch {
   donorDistance: string;
   pickupWindow: string;
   driver: string;
+  vehicleNumber: string;
   address: string;
   eta: string;
   imageUrl: string;
@@ -95,6 +106,7 @@ export interface FlaggedReport {
   batchCode: string;
   reportedBy: string;
   donorName: string;
+  fssaiId: string;
   detail: string;
   status: 'open' | 'dismissed' | 'removed';
 }
@@ -105,7 +117,8 @@ export interface NGOVerification {
   location: string;
   registeredAgo: string;
   taxStatus: string;
-  ein: string;
+  darpanId: string;
+  fssaiReg: string;
   storageCapacity: string;
   documentName: string;
   documentSize: string;
@@ -116,6 +129,7 @@ export interface RecentRescue {
   id: string;
   title: string;
   donor: string;
+  location: string;
   date: string;
   type: 'produce' | 'prepared' | 'dairy';
   completed: boolean;

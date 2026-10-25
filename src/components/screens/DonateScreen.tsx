@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FoodListing, ScreenType } from '../../types';
+import { TAMIL_NADU_DISTRICTS } from '../../data/mockData';
 
 interface DonateScreenProps {
   onPublish: (newListing: FoodListing) => void;
@@ -13,17 +14,20 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
   onShowToast
 }) => {
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
-  const [title, setTitle] = useState('Fresh Artisan Sandwiches & Wraps');
+  const [title, setTitle] = useState('Hot Sambar Rice, Lemon Rice & Poriyal (Wedding Lunch Surplus)');
+  const [tamilTitle, setTamilTitle] = useState('சுடச்சுட சாம்பார் சாதம், எலுமிச்சை சாதம் & பொரியல்');
   const [category, setCategory] = useState<'Prepared' | 'Produce' | 'Bakery' | 'Dairy' | 'Canned/Dry'>('Prepared');
-  const [quantity, setQuantity] = useState<number>(25);
-  const [unit, setUnit] = useState('Boxes / Servings');
+  const [district, setDistrict] = useState('Chennai');
+  const [quantity, setQuantity] = useState<number>(60);
+  const [unit, setUnit] = useState('Boxed Meal Packets');
   const [description, setDescription] = useState(
-    'Prepared fresh today at 11:30 AM in our commercial kitchen. Assorted avocado club wraps and roasted Mediterranean vegetables in eco-friendly compostable containers.'
+    'Freshly cooked hot South Indian lunch from our marriage reception catering in Mylapore. Hygienically packed in silver foil boxes with drumstick sambar, kootu, and lemon rice.'
   );
-  const [tags, setTags] = useState<string[]>(['Vegetarian', 'Nut-Free', 'Refrigerated']);
-  const [expiryTime, setExpiryTime] = useState('6:30 PM');
-  const [pickupAddress, setPickupAddress] = useState('742 Evergreen Terrace, Loading Dock #3');
-  const [pickupNotes, setPickupNotes] = useState('Ring back bell, ask for Maria');
+  const [tags, setTags] = useState<string[]>(['Pure Veg', 'Freshly Cooked', 'FSSAI Certified', 'Hot Insulated Containers']);
+  const [expiryTime, setExpiryTime] = useState('5:00 PM');
+  const [fssaiLicense, setFssaiLicense] = useState('12421008000412');
+  const [pickupAddress, setPickupAddress] = useState('No. 24, North Mada Street, Mylapore, Chennai - 600004');
+  const [pickupNotes, setPickupNotes] = useState('Rear service entrance on Pitchu Pillai St. Tata Ace or volunteer auto parking available.');
   const [pledgeChecked, setPledgeChecked] = useState(true);
   const [isPublishing, setIsPublishing] = useState(false);
 
@@ -32,19 +36,19 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
     label: string;
     emoji: string;
   }> = [
-    { id: 'Prepared', label: 'Prepared Meals', emoji: '🍲' },
-    { id: 'Produce', label: 'Fresh Produce', emoji: '🥬' },
-    { id: 'Bakery', label: 'Bakery', emoji: '🥖' },
-    { id: 'Dairy', label: 'Dairy', emoji: '🥛' },
-    { id: 'Canned/Dry', label: 'Canned/Dry', emoji: '🥫' }
+    { id: 'Prepared', label: 'Kalyanam Meals', emoji: '🍲' },
+    { id: 'Produce', label: 'Agro Produce', emoji: '🥬' },
+    { id: 'Bakery', label: 'Tiffin & Sweets', emoji: '☕' },
+    { id: 'Dairy', label: 'Aavin Dairy', emoji: '🥛' },
+    { id: 'Canned/Dry', label: 'Provisions', emoji: '🥫' }
   ];
 
   const tagOptions = [
-    'Vegetarian',
-    'Nut-Free',
-    'Gluten-Free',
+    'Pure Veg',
+    'Freshly Cooked',
+    'FSSAI Certified',
+    'Hot Insulated Containers',
     'Refrigerated',
-    'Frozen',
     'Room Temp'
   ];
 
@@ -61,13 +65,13 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
     if (file) {
       const url = URL.createObjectURL(file);
       setPhotoUrl(url);
-      onShowToast('✨ AI analyzing food item: tagged as Prepared Meals (wraps & salads)');
+      onShowToast('✨ AI Food Inspector: Verified South Indian Rice & Sambar batch. Temperature tag active.');
     }
   };
 
   const handlePublish = () => {
     if (!pledgeChecked) {
-      onShowToast('Please agree to the Food Safety & Quality Pledge');
+      onShowToast('Please agree to the FSSAI Food Safety & Quality Pledge');
       return;
     }
 
@@ -76,41 +80,47 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
       const newListing: FoodListing = {
         id: `listing-${Date.now()}`,
         title,
+        tamilTitle,
         category,
-        categoryLabel: category === 'Prepared' ? 'Prepared Meals' : category,
+        categoryLabel: category === 'Prepared' ? 'Kalyanam Meals' : category === 'Produce' ? 'Agro Produce' : category,
         categoryBg: category === 'Bakery' ? 'bg-tertiary-fixed' : category === 'Produce' ? 'bg-primary-fixed' : 'bg-secondary-container',
         categoryText: category === 'Bakery' ? 'text-on-tertiary-fixed' : category === 'Produce' ? 'text-on-primary-fixed' : 'text-on-secondary-fixed',
         imageUrl: photoUrl || 'https://lh3.googleusercontent.com/aida-public/AB6AXuBX-j91gIXg04ryv9jHoG9Yn_YiqBhRczuIxVPdlkTFj_biPlVjsoiIr5U2T6OMVE7o6Ry7hWLprHADbLMwFAYoOUpyF-3c4qhIDkF1AHLmEPpRj7I8nsetPf39A6sUFICS7ctxGzAZRCvM-5I8d9092vjmsa_N0D8vdAEfceDAwUG_EPmHUEA0fUB6wxsc0zZiPQhj8xbgOyWtgSYovgxvmxilCpHVXMhRxRIuVFT57_3Xj6uzUdc',
         imageAlt: title,
-        donorName: 'Urban Kitchen & Catering Co.',
+        donorName: 'Sri Meenakshi Bhavan & Catering',
         donorRating: 4.95,
-        donorRescuesCount: 129,
-        donorLocation: 'Mission District (0.8 mi)',
-        distance: '0.8 mi',
+        donorRescuesCount: 143,
+        donorLocation: `${district} (0.8 km)`,
+        city: district,
+        district,
+        pincode: '600004',
+        distance: '0.8 km',
         verified: true,
-        donorContactName: 'Maria Rodriguez',
-        quantityString: `${quantity} ${unit.toLowerCase()} • Feeds ~${quantity} adults`,
+        donorContactName: 'K. Senthil Kumar (Chef)',
+        donorPhone: '+91 98401 24892',
+        quantityString: `${quantity} ${unit} • Feeds ~${quantity} people`,
         portions: quantity,
         remainingQuantity: quantity,
-        weightKg: Math.round(quantity * 0.5),
+        weightKg: Math.round(quantity * 0.4),
         pickupWindow: `Today until ${expiryTime}`,
-        urgentText: 'Urgent Expiry: 3h 40m left',
-        statusBadge: 'Available Now',
+        urgentText: 'Urgent: Pick up before 5:00 PM',
+        statusBadge: 'Freshly Prepared',
         statusType: 'available',
-        hoursLeft: 3.6,
+        hoursLeft: 2.5,
         isUrgent: true,
         tags,
         description,
-        allergenNotice: tags.includes('Nut-Free') ? 'Prepared in a nut-free facility.' : undefined,
+        allergenNotice: tags.includes('Pure Veg') ? '100% Pure Vegetarian. Contains coconut and dal.' : undefined,
         pickupAddress,
-        pickupInstructions: pickupNotes
+        pickupInstructions: pickupNotes,
+        fssaiNumber: `FSSAI Lic. #${fssaiLicense}`
       };
 
       onPublish(newListing);
       setIsPublishing(false);
-      onShowToast('🎉 Donation broadcasted live to 185 community food banks!');
+      onShowToast('🎉 Donation broadcasted to No Food Waste, Robin Hood Army & Tamil Nadu food bank dispatchers!');
       setScreen('dashboard');
-    }, 1200);
+    }, 1100);
   };
 
   return (
@@ -119,11 +129,11 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
       <div className="flex items-center justify-between mb-space-sm pt-space-xs">
         <div className="flex flex-col">
           <span className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">
-            Create Food Donation
+            Create Food Listing • உணவு பதிவு
           </span>
-          <span className="font-label-md text-label-md text-primary font-semibold flex items-center gap-1.5 mt-0.5">
+          <span className="font-label-md text-label-md text-primary font-bold flex items-center gap-1.5 mt-0.5">
             <span className="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            Step 1 of 2: Listing Information
+            Tamil Nadu Rescue Dispatch Form
           </span>
         </div>
 
@@ -137,29 +147,55 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
 
       {/* Progress bar */}
       <div className="w-full h-1.5 bg-surface-container rounded-full overflow-hidden mb-space-lg shadow-sm">
-        <div className="h-full bg-primary-container rounded-full w-1/2 transition-all duration-500"></div>
+        <div className="h-full bg-primary-container rounded-full w-2/3 transition-all duration-500"></div>
       </div>
 
-      {/* Donation Form */}
+      {/* Form */}
       <form className="flex flex-col gap-space-lg" onSubmit={(e) => e.preventDefault()}>
+        {/* District Selector */}
+        <div>
+          <label className="block font-title-md text-on-surface font-bold mb-1">
+            Tamil Nadu District / City <span className="text-tertiary">*</span>
+          </label>
+          <div className="relative flex items-center">
+            <span className="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px]">
+              location_city
+            </span>
+            <select
+              aria-label="District"
+              value={district}
+              onChange={(e) => setDistrict(e.target.value)}
+              className="w-full h-12 pl-11 pr-8 rounded-xl bg-surface-container-lowest text-on-surface font-body-md outline-none border border-surface-container appearance-none font-semibold"
+            >
+              {TAMIL_NADU_DISTRICTS.map((dist) => (
+                <option key={dist} value={dist}>
+                  {dist}
+                </option>
+              ))}
+            </select>
+            <span className="material-symbols-outlined absolute right-3 pointer-events-none text-on-surface-variant">
+              expand_more
+            </span>
+          </div>
+        </div>
+
         {/* Food Photo Dropzone */}
         <div className="flex flex-col gap-space-xs">
-          <label className="font-title-md text-title-md text-on-surface flex items-center justify-between">
+          <label className="font-title-md text-title-md text-on-surface font-bold flex items-center justify-between">
             <span>
               Food Photo <span className="text-tertiary">*</span>
             </span>
-            <span className="font-label-sm text-label-sm text-on-surface-variant">Quality Verified</span>
+            <span className="font-label-sm text-label-sm text-primary font-bold">FSSAI Inspection Ready</span>
           </label>
 
           <div
             className="relative group cursor-pointer overflow-hidden rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-lg flex flex-col items-center justify-center text-center shadow-sm border-2 border-dashed border-surface-container-high"
-            id="photo-dropzone"
           >
             {photoUrl ? (
               <div className="relative w-full h-44 rounded-xl overflow-hidden">
                 <img src={photoUrl} alt="Preview" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-inverse-surface/40 flex items-center justify-center text-on-primary font-label-md">
-                  Tap to replace image
+                <div className="absolute inset-0 bg-inverse-surface/40 flex items-center justify-center text-on-primary font-label-md font-bold">
+                  Tap to take another photo
                 </div>
               </div>
             ) : (
@@ -167,13 +203,13 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
                 <div className="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center text-primary mb-space-sm group-hover:scale-105 transition-transform duration-200">
                   <span className="material-symbols-outlined text-[32px]">photo_camera</span>
                 </div>
-                <p className="font-title-md text-title-md text-on-surface font-semibold">Tap to take photo or upload</p>
-                <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5 max-w-[240px]">
-                  Required for recipient safety review &amp; fast approval
+                <p className="font-title-md text-title-md text-on-surface font-bold">Take photo of surplus food batch</p>
+                <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5 max-w-[260px]">
+                  Required for NGO safety review &amp; thermal condition check
                 </p>
                 <div className="mt-space-md flex items-center gap-space-xs bg-surface-container-highest/80 px-space-md py-1.5 rounded-full">
                   <span className="material-symbols-outlined text-[16px] text-tertiary">auto_awesome</span>
-                  <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">
+                  <span className="font-label-sm text-label-sm text-on-surface-variant font-bold">
                     AI Auto-Tagging Enabled
                   </span>
                 </div>
@@ -189,29 +225,43 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
           </div>
         </div>
 
-        {/* Food Item Title */}
-        <div className="flex flex-col gap-space-xs">
-          <label className="font-title-md text-title-md text-on-surface font-semibold" htmlFor="food-name">
-            Food Item Title <span className="text-tertiary">*</span>
-          </label>
-          <div className="relative flex items-center">
-            <span className="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px]">
-              restaurant
-            </span>
+        {/* Titles */}
+        <div className="flex flex-col gap-3">
+          <div>
+            <label className="font-title-md text-title-md text-on-surface font-bold block mb-1">
+              Food Item Title (English) <span className="text-tertiary">*</span>
+            </label>
+            <div className="relative flex items-center">
+              <span className="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px]">
+                restaurant
+              </span>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="e.g., Hot Sambar Rice, Lemon Rice & Poriyal"
+                className="w-full h-12 pl-11 pr-4 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none border border-surface-container font-medium"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="font-title-md text-title-md text-on-surface font-bold block mb-1">
+              Tamil Name (தமிழ் பெயர் - விருப்பத்திற்குரியது)
+            </label>
             <input
-              id="food-name"
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g., Freshly Prepared Veggie Sandwiches"
-              className="w-full h-12 pl-11 pr-4 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-low transition-colors border border-surface-container"
+              value={tamilTitle}
+              onChange={(e) => setTamilTitle(e.target.value)}
+              placeholder="எ.கா., சுடச்சுட சாம்பார் சாதம் & பொரியல்"
+              className="w-full h-12 px-4 rounded-xl bg-surface-container-lowest text-on-surface font-body-md shadow-sm outline-none border border-surface-container"
             />
           </div>
         </div>
 
-        {/* Category Chips Horizontal Scroll */}
+        {/* Category Chips */}
         <div className="flex flex-col gap-space-xs">
-          <span className="font-title-md text-title-md text-on-surface font-semibold">
+          <span className="font-title-md text-title-md text-on-surface font-bold">
             Category <span className="text-tertiary">*</span>
           </span>
           <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar -mx-gutter-mobile px-gutter-mobile">
@@ -222,9 +272,9 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
                   key={cat.id}
                   type="button"
                   onClick={() => setCategory(cat.id)}
-                  className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md text-label-md active:scale-95 transition-all ${
+                  className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md text-label-md active:scale-95 transition-all font-bold ${
                     isSelected
-                      ? 'bg-primary-container text-on-primary-container shadow-sm font-semibold'
+                      ? 'bg-primary-container text-on-primary-container shadow-sm'
                       : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'
                   }`}
                 >
@@ -239,8 +289,8 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
         {/* Quantity & Volume */}
         <div className="bg-surface-container-low p-space-md rounded-2xl flex flex-col gap-space-sm shadow-sm border border-surface-container">
           <div className="flex justify-between items-center">
-            <span className="font-title-md text-title-md text-on-surface font-semibold">Quantity &amp; Volume</span>
-            <span className="font-label-sm text-label-sm text-primary font-semibold flex items-center gap-1">
+            <span className="font-title-md text-title-md text-on-surface font-bold">Quantity &amp; Servings</span>
+            <span className="font-label-sm text-label-sm text-primary font-bold flex items-center gap-1">
               <span className="material-symbols-outlined text-[16px]">groups</span>
               Feeds ~{quantity} adults
             </span>
@@ -253,10 +303,10 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
               </span>
               <input
                 type="number"
-                min="1"
+                min="5"
                 value={quantity}
                 onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                className="w-full h-12 pl-11 pr-3 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none border border-surface-container"
+                className="w-full h-12 pl-11 pr-3 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none border border-surface-container font-bold"
               />
             </div>
             <div className="relative flex items-center">
@@ -264,11 +314,11 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
                 aria-label="Quantity Unit"
                 value={unit}
                 onChange={(e) => setUnit(e.target.value)}
-                className="w-full h-12 px-3.5 pr-8 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm appearance-none outline-none border border-surface-container"
+                className="w-full h-12 px-3.5 pr-8 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm appearance-none outline-none border border-surface-container font-semibold"
               >
-                <option value="Boxes / Servings">Boxes / Servings</option>
-                <option value="Trays (Family Size)">Trays (Family Size)</option>
+                <option value="Boxed Meal Packets">Packets (Meal Boxes)</option>
                 <option value="Kilograms (kg)">Kilograms (kg)</option>
+                <option value="Insulated Degs / Trays">Large Degs / Trays</option>
                 <option value="Individual Portions">Individual Portions</option>
               </select>
               <span className="material-symbols-outlined absolute right-3 pointer-events-none text-on-surface-variant text-[20px]">
@@ -278,25 +328,25 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
           </div>
         </div>
 
-        {/* Description & Ingredients */}
+        {/* Description & Preparation Notes */}
         <div className="flex flex-col gap-space-xs">
-          <label className="font-title-md text-title-md text-on-surface font-semibold" htmlFor="food-desc">
-            Description &amp; Ingredients
+          <label className="font-title-md text-title-md text-on-surface font-bold" htmlFor="food-desc">
+            Preparation &amp; Packaging Notes
           </label>
           <textarea
             id="food-desc"
             rows={3}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Describe items, ingredients, prep time, packaging details..."
-            className="w-full p-3.5 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none resize-none focus:bg-surface-container-low transition-colors border border-surface-container"
+            placeholder="Describe items, cooking time, thermal container details..."
+            className="w-full p-3.5 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none resize-none border border-surface-container font-medium"
           />
         </div>
 
         {/* Dietary & Storage Tags */}
         <div className="flex flex-col gap-space-xs">
           <div className="flex items-center justify-between">
-            <span className="font-title-md text-title-md text-on-surface font-semibold">Dietary &amp; Storage Tags</span>
+            <span className="font-title-md text-title-md text-on-surface font-bold">Food Safety &amp; Dietary Tags</span>
             <span className="font-label-sm text-label-sm text-on-surface-variant">Tap to toggle</span>
           </div>
 
@@ -308,9 +358,9 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
                   key={tag}
                   type="button"
                   onClick={() => toggleTag(tag)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-label-md text-label-md shadow-sm active:scale-95 transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-label-md text-label-md shadow-sm active:scale-95 transition-all font-bold ${
                     active
-                      ? 'bg-primary-container text-on-primary-container font-semibold'
+                      ? 'bg-primary-container text-on-primary-container'
                       : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'
                   }`}
                 >
@@ -322,10 +372,10 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
           </div>
         </div>
 
-        {/* Pickup By & Expiry Window */}
+        {/* Pickup Window */}
         <div className="bg-surface-container-low p-space-md rounded-2xl flex flex-col gap-space-sm shadow-sm border border-surface-container">
           <div className="flex items-center justify-between">
-            <span className="font-title-md text-title-md text-on-surface font-semibold">Pickup By &amp; Expiry Window</span>
+            <span className="font-title-md text-title-md text-on-surface font-bold">Pickup By &amp; Expiry Window</span>
             <span className="material-symbols-outlined text-tertiary text-[20px]">schedule</span>
           </div>
 
@@ -337,8 +387,8 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
               <input
                 type="text"
                 readOnly
-                value="Today, Nov 18"
-                className="w-full h-12 pl-10 pr-2 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none border border-surface-container"
+                value="Today, Tamil Nadu"
+                className="w-full h-12 pl-10 pr-2 rounded-xl bg-surface-container-lowest text-on-surface font-body-md shadow-sm outline-none border border-surface-container font-semibold"
               />
             </div>
             <div className="relative flex items-center">
@@ -349,7 +399,7 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
                 type="text"
                 value={expiryTime}
                 onChange={(e) => setExpiryTime(e.target.value)}
-                className="w-full h-12 pl-10 pr-2 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none border border-surface-container"
+                className="w-full h-12 pl-10 pr-2 rounded-xl bg-surface-container-lowest text-on-surface font-body-md shadow-sm outline-none border border-surface-container font-bold"
               />
             </div>
           </div>
@@ -360,18 +410,18 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
             </span>
             <div className="flex flex-col">
               <span className="font-label-sm text-label-sm font-bold text-tertiary-container">
-                Urgent Expiry: 3h 40m left
+                Hot Food Safety Window: Must be picked up before {expiryTime}
               </span>
               <span className="font-body-sm text-body-sm leading-tight text-on-tertiary-fixed">
-                Will be prioritized on recipient feeds to prevent waste.
+                Direct dispatch alert pinged to registered NGOs with thermal transport.
               </span>
             </div>
           </div>
         </div>
 
-        {/* Pickup Location */}
+        {/* Pickup Location & FSSAI */}
         <div className="flex flex-col gap-space-sm">
-          <span className="font-title-md text-title-md text-on-surface font-semibold">Pickup Location</span>
+          <span className="font-title-md text-title-md text-on-surface font-bold">Location &amp; Vehicle Access</span>
           <div className="relative flex items-center">
             <span className="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px]">
               pin_drop
@@ -380,40 +430,37 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
               type="text"
               value={pickupAddress}
               onChange={(e) => setPickupAddress(e.target.value)}
-              className="w-full h-12 pl-11 pr-4 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none border border-surface-container"
+              className="w-full h-12 pl-11 pr-4 rounded-xl bg-surface-container-lowest text-on-surface font-body-md shadow-sm outline-none border border-surface-container font-medium"
             />
           </div>
 
           <div className="relative flex items-center">
             <span className="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px]">
-              contact_support
+              local_shipping
             </span>
             <input
               type="text"
               value={pickupNotes}
               onChange={(e) => setPickupNotes(e.target.value)}
-              placeholder="Pickup instructions (e.g., parking spot, dock code)"
-              className="w-full h-12 pl-11 pr-4 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none border border-surface-container"
+              placeholder="e.g. Rear service entrance, van parking available"
+              className="w-full h-12 pl-11 pr-4 rounded-xl bg-surface-container-lowest text-on-surface font-body-md shadow-sm outline-none border border-surface-container font-medium"
             />
           </div>
 
-          {/* Map routing graphic */}
-          <div className="w-full h-28 rounded-xl overflow-hidden shadow-sm flex items-end p-2 relative">
-            <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxgen5qsM8N_FrKhP9se5DKOmHg6wmLEE6GUwxg2m2y_Lh78Kn11CDNnHrhqsqNo_IsUb3I9S7g9exYPSU2b8OW8sxU-PKdHPsGRIiK3jh7AYvKQi7BRCapIW8sfTNIVGrSQBtetnP0bnbOMMMYGtyutug_vecrxFqI972SInb4A9Izz5H_xi3jaViydgE-IO245AogdkyP2wCNIWe5nEkqenZ18BdeilMN8AJzZVono5p1hCDd7c"
-              alt="Routing map"
-              className="w-full h-full object-cover absolute inset-0"
+          <div>
+            <label className="font-label-sm text-on-surface-variant font-semibold block mb-1">
+              FSSAI License Number
+            </label>
+            <input
+              type="text"
+              value={fssaiLicense}
+              onChange={(e) => setFssaiLicense(e.target.value)}
+              className="w-full h-11 px-3.5 rounded-xl bg-surface-container-low text-on-surface font-mono text-body-sm outline-none border border-surface-container font-bold"
             />
-            <div className="bg-surface/90 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1.5 shadow-sm relative z-10">
-              <span className="material-symbols-outlined text-primary text-[16px]">directions</span>
-              <span className="font-label-sm text-label-sm text-on-surface font-medium">
-                Auto-routed for food couriers
-              </span>
-            </div>
           </div>
         </div>
 
-        {/* Safety Pledge */}
+        {/* FSSAI Safety Pledge */}
         <div
           onClick={() => setPledgeChecked(!pledgeChecked)}
           className="bg-surface-container-high/60 p-space-md rounded-2xl flex items-start gap-3 shadow-sm cursor-pointer select-none border border-surface-container"
@@ -425,10 +472,10 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
             className="mt-1 w-5 h-5 rounded accent-primary-container cursor-pointer"
           />
           <div className="font-body-sm text-body-sm text-on-surface-variant">
-            <strong className="text-on-surface font-semibold block font-title-md text-title-md mb-0.5">
-              Food Safety &amp; Quality Pledge
+            <strong className="text-on-surface font-bold block font-title-md text-title-md mb-0.5">
+              FSSAI Surplus Food Recovery Pledge
             </strong>
-            I confirm this food has been handled, prepared, and stored in compliance with local hygiene and temperature safety regulations.
+            I confirm this food was cooked in a licensed kitchen, maintained above 65°C / under 5°C, and is packed in food-grade containers in compliance with FSSAI regulations.
           </div>
         </div>
 
@@ -443,12 +490,12 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
             {isPublishing ? (
               <>
                 <span className="material-symbols-outlined animate-spin text-[20px]">refresh</span>
-                <span>Broadcasting to Community...</span>
+                <span>Broadcasting to TN Rescue Network...</span>
               </>
             ) : (
               <>
                 <span className="material-symbols-outlined text-[22px]">publish</span>
-                <span>Publish Donation</span>
+                <span>Publish Listing • நேரலையில் பதிவுசெய்</span>
               </>
             )}
           </button>
@@ -456,10 +503,10 @@ export const DonateScreen: React.FC<DonateScreenProps> = ({
           <button
             type="button"
             onClick={() => {
-              onShowToast('Draft saved to your pending listings.');
+              onShowToast('Draft saved in local pending queue.');
               setScreen('dashboard');
             }}
-            className="w-full h-12 py-2.5 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-2 hover:bg-surface-container-high active:scale-[0.98] transition-all"
+            className="w-full h-12 py-2.5 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md font-bold flex items-center justify-center gap-2 hover:bg-surface-container-high active:scale-[0.98] transition-all"
           >
             <span className="material-symbols-outlined text-[20px] text-on-surface-variant">bookmark</span>
             <span>Save as Draft</span>

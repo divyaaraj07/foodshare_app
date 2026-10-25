@@ -28,19 +28,19 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
     setIsRefreshing(true);
     setTimeout(() => {
       setIsRefreshing(false);
-      onShowToast('🔄 Network sync complete. All dispatch routes up-to-date.');
+      onShowToast('🔄 Synced with No Food Waste Tamil Nadu GPS dispatch network.');
     }, 700);
   };
 
   const handleStartNav = () => {
     setIsNavigating(true);
-    onShowToast('🚀 Turn-by-turn routing started: Head south on Mission toward 18th St.');
+    onShowToast('🚀 GPS Navigation launched: Heading toward North Mada St via Luz Church Road.');
     setTimeout(() => setIsNavigating(false), 2000);
   };
 
   const handleMarkPickedUp = () => {
     setPickedUpStatus(true);
-    onShowToast('✅ Pick-up verified! 28 meals transferred to Van #2 for distribution.');
+    onShowToast('✅ Pick-up completed! 85 meals transferred to Tata Ace vehicle TN-07-BW-4821 for Triplicane Shelter.');
   };
 
   return (
@@ -58,22 +58,22 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 flex-wrap">
                 <h1 className="font-headline-sm text-headline-sm text-on-surface truncate font-bold">
-                  Hope Community Food Bank
+                  No Food Waste (TN Chapter)
                 </h1>
                 <span
                   className="material-symbols-outlined text-primary text-[18px]"
                   style={{ fontVariationSettings: "'FILL' 1" }}
-                  title="Verified NGO"
+                  title="FSSAI IFSA Accredited NGO"
                 >
                   verified
                 </span>
               </div>
               <div className="flex items-center gap-2 mt-0.5">
-                <span className="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider font-semibold">
-                  NGO Coordinator
+                <span className="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider font-bold">
+                  NGO COORDINATOR
                 </span>
-                <span className="text-on-surface-variant font-body-sm text-body-sm flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-primary inline-block"></span> Hub #4 East
+                <span className="text-on-surface-variant font-body-sm text-body-sm flex items-center gap-1 font-medium">
+                  <span className="w-2 h-2 rounded-full bg-primary inline-block"></span> Chennai &amp; Coimbatore Zone
                 </span>
               </div>
             </div>
@@ -91,12 +91,12 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
         </div>
       </div>
 
-      {/* Summary Metrics Row (3 cards) */}
+      {/* Summary Metrics Row */}
       <div className="grid grid-cols-3 gap-2.5">
         {/* Active Requests */}
         <div className="bg-surface-container-lowest rounded-2xl p-3 shadow-sm flex flex-col justify-between border border-surface-container">
           <div className="flex items-center justify-between">
-            <span className="font-label-sm text-label-sm text-on-surface-variant">Active Req.</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">Active Req.</span>
             <span className="material-symbols-outlined text-[16px] text-tertiary">pending_actions</span>
           </div>
           <div className="mt-2 flex items-baseline gap-1">
@@ -105,7 +105,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
           </div>
         </div>
 
-        {/* Approved Pickups (Highlighted Emerald) */}
+        {/* Ready Pickups */}
         <div className="bg-primary text-on-primary rounded-2xl p-3 shadow-md relative overflow-hidden flex flex-col justify-between">
           <div className="absolute -right-2 -top-2 w-10 h-10 rounded-full bg-white/10 pointer-events-none"></div>
           <div className="flex items-center justify-between">
@@ -114,41 +114,41 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
           </div>
           <div className="mt-2 flex items-baseline gap-1">
             <span className="font-headline-md text-headline-md text-white font-bold">1</span>
-            <span className="font-label-sm text-label-sm text-inverse-on-surface">urgent</span>
+            <span className="font-label-sm text-label-sm text-inverse-on-surface font-medium">urgent</span>
           </div>
         </div>
 
         {/* Total Food Rescued */}
         <div className="bg-surface-container-lowest rounded-2xl p-3 shadow-sm flex flex-col justify-between border border-surface-container">
           <div className="flex items-center justify-between">
-            <span className="font-label-sm text-label-sm text-on-surface-variant">Rescued</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">Rescued in TN</span>
             <span className="material-symbols-outlined text-[16px] text-primary">eco</span>
           </div>
           <div className="mt-2 flex flex-col">
-            <span className="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">4,890</span>
+            <span className="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">6,420</span>
             <span className="font-label-sm text-label-sm text-on-surface-variant">kg total</span>
           </div>
         </div>
       </div>
 
-      {/* Urgent Pickup & Active Requests Section */}
+      {/* Active Dispatch Section */}
       <section className="space-y-space-md">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <h2 className="font-headline-sm text-headline-sm text-on-surface font-bold">Active Dispatch</h2>
+            <h2 className="font-headline-sm text-headline-sm text-on-surface font-bold">Active Dispatch • நேரலை பயணம்</h2>
             <span className="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold">
               Action Needed
             </span>
           </div>
           <button
             onClick={onOpenMap}
-            className="font-label-md text-label-md text-primary flex items-center font-semibold hover:underline"
+            className="font-label-md text-label-md text-primary flex items-center font-bold hover:underline"
           >
-            Live Map <span className="material-symbols-outlined text-[16px] ml-0.5">arrow_forward</span>
+            Live GPS Map <span className="material-symbols-outlined text-[16px] ml-0.5">arrow_forward</span>
           </button>
         </div>
 
-        {/* Urgent Pickup Card (Approved) */}
+        {/* Urgent Pickup Card */}
         {dispatches.map((disp) => (
           <div
             key={disp.id}
@@ -159,9 +159,9 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
             {/* Card Header */}
             <div className="flex items-start justify-between gap-2 pl-2">
               <div>
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-semibold mb-1">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-bold mb-1">
                   <span className="w-2 h-2 rounded-full bg-primary"></span>
-                  {pickedUpStatus ? 'Picked Up • In Van #2' : 'Approved • Ready for Pickup'}
+                  {pickedUpStatus ? 'Picked Up • Onboard Tata Ace' : 'Approved • Ready for Pickup at Mandapam'}
                 </div>
                 <h3 className="font-title-md text-title-md text-on-surface font-bold">{disp.title}</h3>
               </div>
@@ -180,8 +180,8 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1 text-on-surface font-label-md text-label-md">
                   <span className="material-symbols-outlined text-[16px] text-on-surface-variant">storefront</span>
-                  <span className="truncate font-semibold">{disp.donorName}</span>
-                  <span className="text-on-surface-variant font-normal">• {disp.donorDistance}</span>
+                  <span className="truncate font-bold">{disp.donorName}</span>
+                  <span className="text-on-surface-variant font-medium">• {disp.donorDistance}</span>
                 </div>
                 <div className="flex items-center gap-1 text-tertiary-container font-label-sm text-label-sm mt-1">
                   <span className="material-symbols-outlined text-[16px]">schedule</span>
@@ -189,12 +189,12 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                 </div>
                 <div className="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm mt-0.5">
                   <span className="material-symbols-outlined text-[16px] text-primary">local_shipping</span>
-                  <span className="truncate">{disp.driver}</span>
+                  <span className="truncate font-medium">{disp.driver} ({disp.vehicleNumber})</span>
                 </div>
               </div>
             </div>
 
-            {/* Interactive Map Preview for Directions */}
+            {/* Map Preview for Directions */}
             <div className="pl-2">
               <div
                 onClick={onOpenMap}
@@ -202,11 +202,11 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
               >
                 <img
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxgen5qsM8N_FrKhP9se5DKOmHg6wmLEE6GUwxg2m2y_Lh78Kn11CDNnHrhqsqNo_IsUb3I9S7g9exYPSU2b8OW8sxU-PKdHPsGRIiK3jh7AYvKQi7BRCapIW8sfTNIVGrSQBtetnP0bnbOMMMYGtyutug_vecrxFqI972SInb4A9Izz5H_xi3jaViydgE-IO245AogdkyP2wCNIWe5nEkqenZ18BdeilMN8AJzZVono5p1hCDd7c"
-                  alt="SF Route"
+                  alt="Route Map"
                   className="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="bg-surface/90 backdrop-blur-md px-2.5 py-1 rounded-lg text-on-surface flex items-center justify-between w-full shadow-sm relative z-10">
-                  <span className="font-label-sm text-label-sm truncate font-medium">{disp.address}</span>
+                  <span className="font-label-sm text-label-sm truncate font-semibold">{disp.address}</span>
                   <span className="font-label-sm text-label-sm text-primary font-bold shrink-0">{disp.eta}</span>
                 </div>
               </div>
@@ -217,25 +217,25 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
               <button
                 type="button"
                 onClick={handleStartNav}
-                className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest transition-colors active:scale-95 font-semibold"
+                className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest transition-colors active:scale-95 font-bold"
               >
                 <span className={`material-symbols-outlined text-[18px] text-primary ${isNavigating ? 'animate-pulse' : ''}`}>
                   near_me
                 </span>
-                <span>{isNavigating ? 'Routing...' : 'Start Navigation'}</span>
+                <span>{isNavigating ? 'Routing in Chennai...' : 'Start Navigation'}</span>
               </button>
 
               <button
                 type="button"
                 onClick={handleMarkPickedUp}
-                className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl font-label-md text-label-md shadow-sm transition-colors active:scale-95 font-semibold ${
+                className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl font-label-md text-label-md shadow-sm transition-colors active:scale-95 font-bold ${
                   pickedUpStatus
                     ? 'bg-primary-container text-on-primary-container'
                     : 'bg-primary text-on-primary hover:bg-primary-container'
                 }`}
               >
                 <span className="material-symbols-outlined text-[18px]">check_circle</span>
-                <span>{pickedUpStatus ? 'Picked Up' : 'Mark Picked Up'}</span>
+                <span>{pickedUpStatus ? 'Picked Up' : 'Mark Handed Over'}</span>
               </button>
             </div>
           </div>
@@ -246,39 +246,39 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
           <div className="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm space-y-3 border border-surface-container">
             <div className="flex items-start justify-between gap-2">
               <div>
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm font-medium mb-1">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm font-semibold mb-1">
                   <span className="material-symbols-outlined text-[14px] text-tertiary animate-spin">
                     hourglass_empty
                   </span>
-                  Pending Donor Review
+                  Pending Mandapam Review
                 </div>
                 <h3 className="font-title-md text-title-md text-on-surface font-bold">
-                  15 kg Organic Sourdough &amp; Pastries
+                  120 Pieces Mallipoo Idli &amp; Medu Vada
                 </h3>
               </div>
               <span className="px-2 py-0.5 rounded-full bg-[#FEF3C7] text-[#92400E] font-label-sm text-label-sm uppercase tracking-wide shrink-0 font-bold">
-                Bakery
+                Tiffin
               </span>
             </div>
 
             <div className="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
               <div className="flex items-center gap-1">
-                <span className="material-symbols-outlined text-[16px]">bakery_dining</span>
-                <span className="text-on-surface font-medium">Artisan Hearth Bakery</span>
+                <span className="material-symbols-outlined text-[16px]">storefront</span>
+                <span className="text-on-surface font-semibold">Murugan Sweets &amp; Tiffin, T. Nagar</span>
               </div>
-              <span>Submitted 25 mins ago</span>
+              <span className="font-medium">Submitted 24 mins ago</span>
             </div>
 
             <div className="flex items-center justify-between pt-1 border-t border-surface-container-low">
               <span className="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                <span className="material-symbols-outlined text-[16px]">pin_drop</span> 2.4 miles away
+                <span className="material-symbols-outlined text-[16px]">pin_drop</span> 1.4 km away (Usman Rd)
               </span>
               <button
                 onClick={() => {
                   setPendingCancelled(true);
-                  onShowToast('Request for Artisan Hearth Bakery cancelled.');
+                  onShowToast('Request for Murugan Sweets cancelled.');
                 }}
-                className="font-label-md text-label-md text-error px-2 py-1 rounded-lg hover:bg-error-container/40 transition-colors font-semibold"
+                className="font-label-md text-label-md text-error px-2 py-1 rounded-lg hover:bg-error-container/40 transition-colors font-bold"
               >
                 Cancel Request
               </button>
@@ -287,16 +287,16 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
         )}
       </section>
 
-      {/* Smart Suggestions / Recommended Rescue */}
+      {/* Smart Suggestions */}
       <section className="space-y-space-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="material-symbols-outlined text-primary text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>
               recommend
             </span>
-            <h2 className="font-headline-sm text-headline-sm text-on-surface font-bold">Smart Suggestions</h2>
+            <h2 className="font-headline-sm text-headline-sm text-on-surface font-bold">Agro Mandi Suggestions</h2>
           </div>
-          <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">Tailored to your needs</span>
+          <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">Tailored for Chennai Shelters</span>
         </div>
 
         {/* Recommendation Card */}
@@ -313,34 +313,34 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                   <span className="px-2 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46] font-label-sm text-label-sm uppercase tracking-wider font-bold">
                     Produce
                   </span>
-                  <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">• 1.2 miles</span>
+                  <span className="font-label-sm text-label-sm text-on-surface-variant font-medium">• 3.2 km (Koyambedu)</span>
                 </div>
                 <h3 className="font-title-md text-title-md text-on-surface truncate font-bold">
-                  Fresh Farm Greens &amp; Vegetables
+                  48 kg Fresh Koyambedu Vegetables (Keerai &amp; Brinjal)
                 </h3>
                 <p className="font-label-sm text-label-sm text-on-surface-variant mt-0.5">
-                  Golden Gate Organic Market
+                  Koyambedu Wholesale Agro Mandi (Shop #42)
                 </p>
               </div>
 
               <div className="flex items-center justify-between mt-1">
-                <span className="font-label-md text-label-md text-primary font-bold">32 kg available</span>
-                <span className="font-label-sm text-label-sm text-tertiary font-medium">Expires in 4h</span>
+                <span className="font-label-md text-label-md text-primary font-bold">48 kg available</span>
+                <span className="font-label-sm text-label-sm text-tertiary font-bold">Pickup before 8:30 PM</span>
               </div>
             </div>
           </div>
 
           <div className="flex items-center justify-between pt-1 border-t border-surface-container">
             <span className="font-body-sm text-body-sm text-on-surface-variant">
-              Matches “Fresh Produce” request alert
+              Matches “Fresh Produce” alert for Triplicane Shelter
             </span>
             <button
               onClick={() => {
                 setSmartRequested(true);
-                onShowToast('Request dispatched to Golden Gate Organic Market for 32 kg produce.');
+                onShowToast('Request dispatched to Koyambedu Agro Mandi for 48 kg produce.');
               }}
               disabled={smartRequested}
-              className={`px-4 py-2 rounded-xl font-label-md text-label-md shadow-sm transition-all active:scale-95 flex items-center gap-1 font-semibold ${
+              className={`px-4 py-2 rounded-xl font-label-md text-label-md shadow-sm transition-all active:scale-95 flex items-center gap-1 font-bold ${
                 smartRequested
                   ? 'bg-primary-container text-on-primary-container'
                   : 'bg-primary hover:bg-primary-container text-on-primary'
@@ -358,10 +358,10 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
       {/* Recent Rescue History */}
       <section className="space-y-space-sm">
         <div className="flex items-center justify-between">
-          <h2 className="font-headline-sm text-headline-sm text-on-surface font-bold">Recent Rescues</h2>
+          <h2 className="font-headline-sm text-headline-sm text-on-surface font-bold">Recent Tamil Nadu Rescues</h2>
           <button
             onClick={() => setScreen('browse')}
-            className="font-label-md text-label-md text-primary font-semibold hover:underline"
+            className="font-label-md text-label-md text-primary font-bold hover:underline"
           >
             View Full Log
           </button>
@@ -388,15 +388,15 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                   </span>
                 </div>
                 <div className="min-w-0">
-                  <p className="font-title-md text-title-md text-on-surface truncate font-semibold">{res.title}</p>
-                  <p className="font-body-sm text-body-sm text-on-surface-variant">
-                    {res.date} • {res.donor}
+                  <p className="font-title-md text-title-md text-on-surface truncate font-bold">{res.title}</p>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant font-medium">
+                    {res.location} • {res.donor}
                   </p>
                 </div>
               </div>
 
               <div className="text-right shrink-0">
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-semibold">
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-bold">
                   <span className="material-symbols-outlined text-[14px]">done_all</span> Completed
                 </span>
               </div>
@@ -405,15 +405,15 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
         </div>
       </section>
 
-      {/* Community Impact Spark Banner */}
+      {/* Community Goal Banner */}
       <div className="bg-surface-container rounded-2xl p-space-md flex items-center gap-3 shadow-sm border border-surface-container-high">
         <div className="w-10 h-10 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
           <span className="material-symbols-outlined text-[24px]">favorite</span>
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="font-title-md text-title-md text-on-surface font-semibold">Community Reach Goal</h3>
+          <h3 className="font-title-md text-title-md text-on-surface font-bold">Chennai &amp; Kovai Community Goal</h3>
           <p className="font-body-sm text-body-sm text-on-surface-variant">
-            You are 110 kg away from hitting 5,000 kg milestone this month!
+            You are only 120 kg away from completing the 10,000 kg Annadhanam rescue milestone this month!
           </p>
         </div>
       </div>
